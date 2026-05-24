@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Berhasil Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+        }
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: #4285F4;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-name {
+            color: #333;
+        }
+        .btn-logout {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .btn-logout:hover {
+            background: #c82333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .info-card {
+            background: #e9f0ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .info-card h3 {
+            color: #4285F4;
+            margin-bottom: 15px;
+        }
+        .info-card p {
+            margin: 8px 0;
+            color: #555;
+        }
+        hr {
+            margin: 20px 0;
+            border: 0;
+            height: 1px;
+            background: #ddd;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Sistem Login OOP</div>
+        <div class="user-info">
+            <span class="user-name">Halo, {{ user_name }}!</span>
+            <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>✅ Login Berhasil</h1>
+        <div class="badge">Fitur Autentikasi Google - Progres 1</div>
+        
+        <div class="info-card">
+            <h3>📋 Informasi Session</h3>
+            <p><strong>Nama:</strong> {{ user_name }}</p>
+            <p><strong>Status:</strong> Terautentikasi dengan Google OAuth</p>
+            <p><strong>Waktu akses:</strong> <span id="timestamp"></span></p>
+        </div>
+
+        <hr>
+
+        <p style="color: #666;">Ini adalah halaman dashboard sederhana sebagai bukti bahwa fitur login telah berhasil dipisahkan dari fitur lainnya.</p>
+        <p style="color: #666; margin-top: 10px;">Kode ini menggunakan pendekatan <strong>Object-Oriented Programming</strong> (class GoogleAuth, class-based views).</p>
+    </div>
+
+    <footer>
+        Tugas Progres - Hanya menampilkan fitur login | Backend Flask + Google OAuth
+    </footer>
+
+    <script>
+        document.getElementById('timestamp').innerText = new Date().toLocaleString('id-ID');
+    </script>
+</body>
+</html>
