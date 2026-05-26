@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBG - Login Badan Gizi Nasional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(25, 118, 210, 0.1);
+            filter: blur(60px);
+            z-index: 0;
+        }
+        .circle1 { width: 300px; height: 300px; top: -100px; left: -100px; }
+        .circle2 { width: 400px; height: 400px; bottom: -150px; right: -150px; background: rgba(2, 136, 209, 0.1); }
+        .circle3 { width: 200px; height: 200px; top: 40%; left: 70%; background: rgba(0, 105, 92, 0.08); }
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 32px;
+            text-align: center;
+            z-index: 2;
+            transition: transform 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .login-card:hover { transform: translateY(-5px); }
+        .logo-container { display: flex; justify-content: center; margin-bottom: 20px; }
+        .logo-bgn { width: 90px; height: auto; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)); transition: transform 0.2s ease; }
+        .logo-bgn:hover { transform: scale(1.02); }
+        h1 { font-size: 28px; font-weight: 700; color: #0d47a1; margin-bottom: 8px; }
+        .subtitle { color: #1565c0; font-weight: 500; margin-bottom: 32px; font-size: 15px; border-bottom: 2px solid #bbdefb; display: inline-block; padding-bottom: 6px; }
+        .description { color: #1e3a5f; font-size: 14px; line-height: 1.5; margin-bottom: 32px; background: #e3f2fd; padding: 16px; border-radius: 20px; text-align: left; }
+        .description i { color: #1976d2; margin-right: 8px; }
+        .description p { margin: 6px 0; }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: white;
+            border: 1px solid #bbdefb;
+            border-radius: 48px;
+            padding: 14px 24px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            color: #0d47a1;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .google-btn i { font-size: 22px; color: #4285f4; }
+        .google-btn:hover { background: #f0f8ff; border-color: #1976d2; box-shadow: 0 8px 20px rgba(25, 118, 210, 0.2); transform: scale(1.01); }
+        .help-link { margin-top: 24px; text-align: center; }
+        .help-link a { color: #1976d2; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 13px; cursor: pointer; }
+        .help-link a i { font-size: 12px; }
+        .help-link a:hover { color: #0d47a1; text-decoration: underline; }
+        .footer-note { margin-top: 32px; font-size: 12px; color: #54708f; border-top: 1px solid #bbdefb; padding-top: 20px; }
+        .footer-note i { color: #1976d2; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            max-width: 400px;
+            width: 90%;
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.3s ease;
+            position: relative;
+        }
+        .modal-content h3 { font-size: 22px; color: #0d47a1; margin-bottom: 8px; }
+        .modal-content .sub { color: #1565c0; font-size: 13px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; display: inline-block; padding-bottom: 6px; }
+        .contact-list { text-align: left; margin: 20px 0; }
+        .contact-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+        .contact-item i { width: 32px; font-size: 20px; color: #1976d2; }
+        .contact-item .detail { flex: 1; }
+        .contact-item .label { font-size: 13px; color: #5f6368; }
+        .contact-item .value { font-weight: 600; color: #1e3a5f; }
+        .contact-item a { color: #1976d2; text-decoration: none; }
+        .contact-item a:hover { text-decoration: underline; }
+        .close-modal { background: #1976d2; color: white; border: none; padding: 10px 20px; border-radius: 40px; font-weight: 600; margin-top: 16px; cursor: pointer; transition: 0.2s; }
+        .close-modal:hover { background: #0d47a1; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 520px) {
+            .login-card { padding: 30px 24px; }
+            h1 { font-size: 24px; }
+            .logo-bgn { width: 70px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-circle circle1"></div>
+    <div class="bg-circle circle2"></div>
+    <div class="bg-circle circle3"></div>
+
+    <div class="login-card">
+        <div class="logo-container">
+            <img class="logo-bgn" src="https://upload.wikimedia.org/wikipedia/id/thumb/2/29/Logo_Badan_Gizi_Nasional.svg/1280px-Logo_Badan_Gizi_Nasional.svg.png" alt="Logo Badan Gizi Nasional">
+        </div>
+        <h1>MBG • SPPG</h1>
+        <div class="subtitle">Sistem Rekomendasi Menu Gizi Seimbang</div>
+        <div class="description">
+            <p><i class="fas fa-check-circle"></i> Pilihan menu gizi seimbang</p>
+            <p><i class="fas fa-apple-alt"></i> Memastikan keseimbangan gizi harian</p> 
+            <p><i class="fas fa-chalkboard-user"></i> Dirancang khusus untuk operasional SPPG</p>
+        </div>
+
+        <!-- PERBAIKAN: gunakan endpoint 'auth' dengan action 'login' -->
+        <a href="{{ url_for('auth', action='login') }}" class="google-btn">
+            <i class="fab fa-google"></i>
+            <span>Login dengan Akun Google</span>
+        </a>
+
+        <div class="help-link">
+            <a id="contactAdminBtn">
+                <i class="fas fa-headset"></i> Hubungi Admin
+            </a>
+        </div>
+        <div class="footer-note">
+            <i class="fas fa-shield-alt"></i> Akses terbatas untuk tenaga profesional gizi terdaftar<br>
+            Program Makanan Bergizi Gratis • Indonesia
+        </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <h3>Hubungi Admin</h3>
+            <div class="sub">Tim IT MBG akan merespon segera</div>
+            <div class="contact-list">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="detail">
+                        <div class="label">Email Resmi</div>
+                        <div class="value"><a href="mailto:admin@mbg.go.id">mahendraabiyasa@mbg.go.id</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="detail">
+                        <div class="label">WhatsApp (Admin)</div>
+                        <div class="value"><a href="https://wa.me/6281234567890?text=Halo%20saya%20membutuhkan%20bantuan%20login%20MBG" target="_blank">081393193292</a></div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="detail">
+                        <div class="label">Hotline</div>
+                        <div class="value"><a href="tel:+62217456789">(021) 745-6789</a></div>
+                    </div>
+                </div>
+            </div>
+            <button class="close-modal" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("contactModal");
+        var btn = document.getElementById("contactAdminBtn");
+        btn.onclick = function() { modal.style.display = "flex"; }
+        function closeModal() { modal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == modal) modal.style.display = "none"; }
+    </script>
+</body>
+</html>

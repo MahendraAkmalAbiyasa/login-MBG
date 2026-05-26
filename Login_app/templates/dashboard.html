@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - MBG</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .btn-logout { background: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Selamat datang, {{ user_name }}!</h1>
+    <p>Anda berhasil login ke Sistem MBG.</p>
+    <a href="{{ url_for('auth', action='logout') }}" class="btn-logout">Logout</a>
+</body>
+</html>
